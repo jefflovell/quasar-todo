@@ -10,13 +10,15 @@
           aria-label="Menu"
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
-
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
+      <div class="q-px-lg q-pt-xl q-mb-md">
+        <div class="text-h3">Todos</div>
+        <div class="text-subtitle1">Monday 4 November</div>
+      </div>
+      <q-img
+        src="../assets/java.jpg"
+        class="header-image absolute-top"
+      />
     </q-header>
 
     <q-drawer
@@ -105,3 +107,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  .header-image {
+    height: 100%;
+    z-index: -1;
+    opacity: 0.2;
+  }
+</style>
