@@ -9,7 +9,10 @@
         change Toggle state.
       -->
 
-      <q-item v-ripple>
+      <q-item
+        v-for="task in tasks"
+        :key="task.title"
+        v-ripple>
         <q-item-section avatar>
           <q-checkbox
             v-model="color"
@@ -17,7 +20,7 @@
             color="teal" />
         </q-item-section>
         <q-item-section>
-          <q-item-label>Teal</q-item-label>
+          <q-item-label>{{task.title}}</q-item-label>
         </q-item-section>
       </q-item>
 
