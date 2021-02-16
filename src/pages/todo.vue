@@ -1,6 +1,25 @@
 <template>
   <q-page class="bg-grey-3 column">
-
+    <div class="row q-pa-sm bg-accent">
+      <q-input
+        v-model="newTask"
+        @keyup.enter="addTask"
+        class="col"
+        square
+        filled
+        bg-color="white"
+        placeholder="Add task"
+        dense>
+        <template v-slot:append>
+          <q-btn
+           @click="addTask"
+            round
+            dense
+            flat
+            icon="add" />
+        </template>
+      </q-input>
+    </div>
     <q-list
       class="bg-white"
       separator
@@ -43,11 +62,6 @@
       </q-item>
 
     </q-list>
-
-    <div class="q-px-sm q-mt-sm">
-      Your selection is: <strong>{{ }}</strong>
-    </div>
-
   </q-page>
 </template>
 
@@ -55,19 +69,21 @@
 export default {
   data () {
     return {
+      newTask: '',
       tasks: [
-        {
-          title: 'Dev App',
-          done: false
-        },
-        {
-          title: 'Debug App',
-          done: false
-        },
-        {
-          title: 'Deploy App',
-          done: false
-        }
+        // Test Data
+        // {
+        //   title: 'Dev App',
+        //   done: false
+        // },
+        // {
+        //   title: 'Debug App',
+        //   done: false
+        // },
+        // {
+        //   title: 'Deploy App',
+        //   done: false
+        // }
       ]
     }
   },
@@ -79,7 +95,9 @@ export default {
         cancel: true,
         persistent: true
       }).onOk(() => {
+        const deletedTask = this.tasks[index].title
         this.tasks.splice(index, 1)
+        this.$q.notify('Task: ' + "'" + deletedTask + "'" + ' Deleted')
       }).onOk(() => {
         // console.log('>>>> second OK catcher')
       }).onCancel(() => {
@@ -87,6 +105,13 @@ export default {
       }).onDismiss(() => {
         // console.log('I am triggered on both OK and Cancel')
       })
+    },
+    addTask () {
+      this.tasks.push({
+        title: this.newTask,
+        done: false
+      })
+      this.newTask = ''
     }
   }
 }
